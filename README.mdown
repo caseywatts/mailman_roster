@@ -5,23 +5,17 @@ This app syncs a roster of STs with a set of mailman lists, based on college and
 
 ## Usage
 
-### Database
+### CSV
 
-To use this app, first set up a database named 'roster' and ensure it has a table named 'users' with the following columns:
-
-* id
-* email
-* queue
-* college
-
-Edit database_configuration.rb if needed to ensure the app can connect to your database.
-
-Finally, using your preferred program, import your list of users into the database.
+1. Create a `roster.csv` file with the columns
+  1. `Yale Email`
+  2. `Queue`
+2. Save `roster.csv` in the same folder as the script `roster.rb`
 
 
 ### Running the Script
 
-Once you have your data loaded in the DB, run:
+Once you have your data loaded in a properly formatted csv, run:
 
     bundle install
     bundle exec ruby roster.rb
@@ -30,7 +24,11 @@ Once you have your data loaded in the DB, run:
 
 Once the script has run, copy over the files created (```command list``` and ```studtech-*```) to the mailman server.
 
-Finally, execute the 'command_list' file (you may need to run chmod +x) on it.
+Example:
 
-
+1. `scp -r mailman_roster/ csw3@ahi.its.yale.edu:~`
+2. `ssh ahi@its.yale.edu`
+3. Confirm lists: `cat mailman_roster/studtech-st-bk`
+3. `chmod +x mailman_roster/command_list`
+4. `mailman_roster/command_list`
 
